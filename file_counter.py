@@ -32,6 +32,11 @@ def file_counter(path):
         else:
             all_files[filepath.suffix] = 1
     
+    file_out = open("all_files.txt", "a")
+    file_out.write(str(all_files))
+    file_out.write("\n")
+    file_out.close()
+
     pprint.pprint(all_files)
     return all_files
 
@@ -47,6 +52,6 @@ def move_files(path, quant: int, file_record: dict):
     return 
         
 
-#file_counter(path)
+file_counter(path)
 #move_filetype(path, '.txt')
-move_files(path, 5, file_counter(path))
+#move_files(path, 5, file_counter(path))
