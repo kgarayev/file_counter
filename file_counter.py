@@ -1,5 +1,5 @@
 # Add the code for the file counter script that you wrote in the course.
-import pathlib, pprint
+import pathlib, pprint, csv
 
 # find the path to the current directory
 path = pathlib.Path().cwd()
@@ -23,22 +23,24 @@ def move_filetype(path, type):
 # counts various types of files in the given directory
 def file_counter(path):
     # create a dictionary to record all the files
-    all_files = {}
+    count = {}
 
     for filepath in path.iterdir():
         # filter for various file types and record the count
-        if filepath.suffix in all_files:
-            all_files[filepath.suffix] += 1
+        if filepath.suffix in count:
+            count[filepath.suffix] += 1
         else:
-            all_files[filepath.suffix] = 1
+            count[filepath.suffix] = 1
     
-    file_out = open("all_files.txt", "a")
-    file_out.write(str(all_files))
-    file_out.write("\n")
-    file_out.close()
+    types = count.keys()
 
-    pprint.pprint(all_files)
-    return all_files
+    with open("filecounts.csv", "w") as csvfile:
+        countwriter = csv.DictWriter(csvfile, fieldnames=types)
+        countwriter.writeheader()
+        countwriter.writerow(count)
+
+    pprint.pprint(count)
+    return count
 
 # moves files more than or equal to quant into a dedicated folder given a dictionary of files
 def move_files(path, quant: int, file_record: dict):
@@ -50,8 +52,14 @@ def move_files(path, quant: int, file_record: dict):
             move_filetype(path, key)
     
     return 
-        
 
 file_counter(path)
 #move_filetype(path, '.txt')
 #move_files(path, 5, file_counter(path))
+
+#file_in = open("all_files.txt", "r")
+#contents = file_in.read()
+#file_in.close()
+#print(type(contents))
+#dassag = dict(contents)
+
