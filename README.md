@@ -1,5 +1,10 @@
 # :file_folder: File Type Organiser
 
+## :computer: Tech Used
+
+- Programming Languages: Python
+- Version Control: Git
+
 ## :page_facing_up: Overview
 
 The File Type Organiser is a Python script designed to analyse the files in the current directory and count the occurrences of each file type. It then groups the files based on their types and moves them into dedicated folders accordingly. The script utilises Python's file handling capabilities to efficiently process and organise the files.
